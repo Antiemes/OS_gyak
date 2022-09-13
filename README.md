@@ -203,3 +203,117 @@ ls -r
 
 A rendezést megfordítja.
 
+Az ls kapcsolói kombinálhatóak is, például:
+
+```bash
+ls -alr
+```
+
+Rejtett fájlokat is tartalmazó, hosszú formátumú rekurzív listát ad.
+
+### Fájl műveletek
+
+#### Másolás
+
+Fájlok másolása a `cp` paranccsal történik:
+
+```bash
+cp forrás cél
+```
+
+A forrás lehet egy, vagy több fájl, illetve könyvtár is. A cél egy esetet kivéve mindig könyvtár.
+(Ha a forrás egy fájl, akkor a cél is lehet fájl. Például le tudunk másolni egy fájlt egy új néven.)
+
+A másolás során használhatunk dzsóker karaktereket is:
+
+ * `*`: Tetszőleges számú (akár 0 db is!) tetszőleges karaktert helyettesít.
+ * `?`: Pontosan 1 db tetszőleges karaktert helyettesít.
+ * `[K-V]`: K (kezdet) és V (vég) között bármilyen karaktert helyettesít.
+ * `[K-V0-9abc]`: Ez a minta egy olyan karaktert helyettesít, ami vagy K és V között valami, vagy 0 és 9 között valami, vagy a, vagy b, vagy c lehet.
+
+Néhány példa:
+
+```bash
+mkdir cel
+cp *.py cel
+cp /etc/*.conf /etc/*.cfg cel
+cp *.txt /tmp
+cp beszamolo.docx beszamolo_backup.docx
+```
+
+Ha a másolandók közt könyvtár is van, akkor a `-r` kapcsolót meg kell adni. (`r` mint recursive)
+
+```bash
+cp -r /etc/systemd .
+```
+
+Itt van jelentősége a `.` speciális könyvtárnak, ami az aktuális könyvtárt jelenti (ez a parancs tehát az
+aktuális könyvtárba fog másolni).
+
+```bash
+cp -r /etc/li[a-x]* /tmp
+```
+
+Ez a minta azokra a bejegyzésekre illeszkedik, amik első két betűje `li`, amit *a* és *x* között bármi
+követhet, illetve ezek után még tetszőleges karakterek következhetnek.
+
+A cp a létező fájlt kérdés nélkül felülírja. Ha megadjuk a `-i` kapcsolót, akkor minden fájl esetében rákérdez.
+
+#### Törlés
+
+Fájlok törlése az `rm` paranccsal történik:
+
+```bash
+rm file1 file2 file3 ...
+```
+
+Könyvtár törlése esetén hibaüzenetet kapunk; ilyenkor a `-r` kapcsolót is meg kell adni.
+
+```bash
+rm -r konyvtar
+```
+
+Itt is használhatunk helyettesítő (dzsóker, wildcard) karaktereket:
+
+```bash
+rm *.doc *.txt
+```
+
+A `-i` kapcsolóval kiegészítve minden törlendő fájlra, könyvtárral egyenként rákérdez.
+
+#### Üres könyvtár törlése
+
+Az `rmdir` paranccsal történik.
+
+TBD!
+
+#### Áthelyezés, átnevezés
+
+Az `mv` paranccsal történik.
+
+TBD!
+
+## Jogosultságok kezelése
+
+A Linux (és a Unixok) a fájlok következő jogosultságait kezelik:
+
+ * Tulajdonos
+ * Csoport
+ * Tulajdonos jogosultságai (olvasás, írás, végrehajtás)
+ * Csoport jogosultságai (olvasás, írás, végrehajtás)
+ * Mindenki más jogosultságai (olvasás, írás, végrehajtás)
+
+Ezeket az adatokat az `ls -l` 
+
+# Programok összekötése pipe-pal
+
+Számos olyan parancssori program van, ami a bemenetét a standard billentyűzetről (vagy onnan is) veszi,
+illetve a kimenetét a standard kimenetre írja. (A standard bemenet alapesetben a billentyűzet,
+a standard kimenet pedig a képernyő.) Az ilyen típusú programok összekötésével komplex feldolgozás
+valósítható meg, elsősorban szöveges tartalmak esetében.
+
+## cat
+
+## wc
+
+## head, tail
