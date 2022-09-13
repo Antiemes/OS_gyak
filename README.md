@@ -317,3 +317,48 @@ valósítható meg, elsősorban szöveges tartalmak esetében.
 ## wc
 
 ## head, tail
+
+# Reguláris kifejezések
+
+A reguláris kifejezés (regular expression, regexp, regex) egy számításelméleti fogalom. Segitségével
+egy *nyelvet* (~szavak halmazát) lehet definiálni; meg tudjuk vizsgálni, hogy egy szöveg *illeszkedik-e*
+egy reguláris kifejezésre, vagyis *eleme-e* az általa definiált nyelvnek (halmaznak).
+
+## A reguláris kifejezések felépítése
+
+ * A reguláris kifejezések elemi (*atomi*) építőegységekből épülnek fel. Ilyen egységek például
+az *alfanumerikus karakterek* (betűk, és számok), amik önmagukra illeszkednek.
+
+ * Több atomi egység egymás után írva arra illeszkedik, amit sorban egymás után az egységek kifejeznek.
+
+Példa:
+
+```
+a
+```
+
+Betű, önmagára illeszkedik.
+
+```
+b
+```
+
+Ez is egy betű, ez is önmagára illeszkedik.
+
+```
+ab
+```
+
+Két építőegység, ez összesen az `ab`-re illeszkedik.
+
+Tehát bármely szó magára a szóra illeszkedik.
+
+## A grep
+
+A `grep` segítségével egy szövegből tudjuk azokat a sorokat kiszűrni, amelyik *tartalmaznak* egy
+bizonyos reguláris kifejezést. Egyelőre csak nagyon egyszerű reguláris kifejezéseket
+tudunk készíteni.
+
+```bash
+
+```
