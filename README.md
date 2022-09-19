@@ -505,4 +505,42 @@ először csak karakterek) egymás utáni előfordulásainak számát tudjuk jel
  * `atom?`: A megadott atom 0, vagy 1 darab előfordulása
  * `atom+`: A megadott atom legalább 1 darab (1-végtelen darab) előfordulása
 
+### Kiterjesztett szintaxis
+
+### Összetett példák
+
+```bash
+ip addr show
+
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp0s31f6: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
+[...]
+```
+
+Szedjük ki a releváns részeket. Kétféle információra vagyunk kiváncsiak: A számozott sorokra és az
+`inet`-tel kezdődőekre.
+
+Számozott sorok:
+
+```bash
+ip addr show | grep -E '^[0-9]+:'
+```
+
+Az inet-es sorok:
+
+```bash
+ip addr show | grep -E '^ {4}inet '
+```
+
+A kettő együtt:
+
+```bash
+ip addr show | grep -E '(^[0-9]+:|^ {4}inet )'
+```
+
 
