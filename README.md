@@ -489,4 +489,20 @@ A halmazt lehet negálni is a `^` jellel.
 
  * `[^A-Z]`: Bármely karakterre illeszkedik, ami *nem* nagybetű.
 
+Végezetül a `.` (pont) bármely karakterre illeszkedik.
+
+Néhány példa:
+
+ * `^sz..[ef][^thpza]$`: *sz* betű, majd két tetszőleges karakter, majd *e*, vagy *f* betű, majd egy olyan karakter, ami nem *t*, nem *h*, nem *p*, nem *z* és nem is *a*.
+ * `^.szt`: A sor első karaktere tetszőleges lehet, majd *s*, *z* és *t* következik
+
+### Kvantorok
+
+A kvantorokkal (többszörözőkkel) a reguláris kifejezés bizonyos részei (példáinkban
+először csak karakterek) egymás utáni előfordulásainak számát tudjuk jelölni.
+
+ * `atom*`: A megadott atom bármennyi (0-végtelen) darab előfordulása
+ * `atom?`: A megadott atom 0, vagy 1 darab előfordulása
+ * `atom+`: A megadott atom legalább 1 darab (1-végtelen darab) előfordulása
+
 
