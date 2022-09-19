@@ -543,4 +543,60 @@ A kettő együtt:
 ip addr show | grep -E '(^[0-9]+:|^ {4}inet )'
 ```
 
+## A `cut` és az `awk`
+
+A `cut` mezők kiírására való, feltéve hogy a mezőket valamilyen fix elválasztó karakter határolja.
+(Ez alapértelmezetten a tabulátor.)
+
+A fontosabb kapcsolók:
+
+ * `-d`: elválasztó karakter, *delimiter*
+ * `-f`: mezők (*field*) listája
+
+Egy vesszővel határolt táblázat második és harmadik oszlopának kinyerése például a következő
+módon történhet:
+
+
+```bash
+cat tablazat.csv | cut -d "," -f 2,3
+```
+
+Az `awk` tulajdonképpen egy teljes értékű programnyelv, mi viszont csak a `print` utasítást fogjuk használni
+belőle. Például az `ls -l` kimenetéből a fájlok nevének és hosszuknak a kinyerése:
+
+
+```bash
+ls -l | awk '{print $9 " " $5}'
+```
+
+Itt a `" "` nélkül összefolyna a név és a hossz.
+
+Nézzük meg a nem sokkal ezelőtti példán is. Szükségünk van mondjuk az előző blokkban
+tárgyalt parancs kimenetéből az IP címet tartalmazó mezőre:
+
+```bash
+ip addr show | grep -E '^ {4}inet ' | awk '{print $2}'
+
+127.0.0.1/8
+192.168.1.166/24
+172.17.0.1/16
+```
+
+Ugyanez a `cut`-tal:
+
+```bash
+ip addr show | grep -E '^ {4}inet ' | cut -d " " -f 6
+```
+
+Itt a 6. mezőt kellett megadni, mert az első négy szóköz önmagában 1-1 mezőnek számít.
+
+Ezt a kimenetet például a `/` jelet mint elválasztót használva tovább bonthatjuk:
+
+```bash
+ip addr show | grep -E '^ {4}inet ' | awk '{print $2}' | cut -d '/' -f 1
+
+127.0.0.1
+192.168.1.166/
+172.17.0.1
+```
 
