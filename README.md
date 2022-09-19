@@ -318,13 +318,13 @@ valósítható meg, elsősorban szöveges tartalmak esetében.
 
 ## head, tail
 
-# Reguláris kifejezések
+# Reguláris kifejezések és a `grep` parancs
 
 A reguláris kifejezés (regular expression, regexp, regex) egy számításelméleti fogalom. Segitségével
 egy *nyelvet* (~szavak halmazát) lehet definiálni; meg tudjuk vizsgálni, hogy egy szöveg *illeszkedik-e*
 egy reguláris kifejezésre, vagyis *eleme-e* az általa definiált nyelvnek (halmaznak).
 
-## A reguláris kifejezések felépítése
+## A legegyszerűbb reguláris kifejezések
 
  * A reguláris kifejezések elemi (*atomi*) építőegységekből épülnek fel. Ilyen egységek például
 az *alfanumerikus karakterek* (betűk, és számok), amik önmagukra illeszkednek.
@@ -351,14 +351,142 @@ ab
 
 Két építőegység, ez összesen az `ab`-re illeszkedik.
 
-Tehát bármely szó magára a szóra illeszkedik.
+Tehát bármely szó (illetve betűkből, számokból és néhány
+egyéb jelből álló karaktersorozat) magára a szóra illeszkedik.
 
-## A grep
+## A `grep`
 
 A `grep` segítségével egy szövegből tudjuk azokat a sorokat kiszűrni, amelyik *tartalmaznak* egy
-bizonyos reguláris kifejezést. Egyelőre csak nagyon egyszerű reguláris kifejezéseket
+bizonyos reguláris kifejezést.
+A példákat egy képzeletbeli *pelda.txt* nevű fájlon keresztül fogjuk kipróbálni.
+
+A *grep*-et használhatjuk úgy is, hogy megadjuk neki a bemenetet tartalmazó fájlt:
+
+```bash
+grep regex pelda.txt
+```
+
+Illetve úgy is, hogy a bemenetet a standard bemenetről kapja:
+
+```bash
+valamilyen parancsok | grep regex
+```
+
+Egyelőre csak nagyon egyszerű reguláris kifejezéseket
 tudunk készíteni.
 
 ```bash
+grep valami pelda.txt
 
+egyvalami
+ilyesvalami
+másvalami
+olyasvalami
+valami
+valamicske
+valamilyen
+valamiből
+valamicskét
 ```
+
+### Kis- nagybetű érzékenység
+
+A `grep` kis-nagybetű érzékeny (case sensitive), tehát különbséget tesz a kis- és nagybetűk között.
+Ennek kikapcsolása a `-i` kapcsolóval történik.
+
+```bash
+grep Pista pelda.txt
+
+Pista
+```
+
+De a *-i* kapcsoló megadásával:
+
+```bash
+grep Pista pelda.txt
+
+pápista
+sipista
+trappista
+utópista
+Pista
+eszképista
+```
+
+### Keresés megfordítása (regex tagadása)
+
+További fontos kapcsoló a `-v`, amivel `grep` azokat a sorokat fogja kiírni, amikre a megadott
+reguláris kifejezés *NEM* illeszkedik.
+
+```bash
+grep -v a pelda.txt
+```
+
+Olyan sorokat fog kiírni, amikben *nincs* `a` betű.
+
+### Horgonyok
+
+Az eddigi példákból látható volt, hogy a megadott kifejezés bárhol
+lehet a sorban (az elején, a végén, valahol középen), a `grep` mindenképpen
+kiírta az adott szót. A reguláris kifejezésben megadhatunk *horgonyokat*,
+amik valahova (a sor elejére, végére) lerögzítik a reguláris kifejezés adott részét.
+
+ * `^`: A sor elejére rögzít
+ * `$`: A sor végére rögzíŧ
+
+
+Legyen a reguláris kifejezés a sor elején:
+
+```bash
+grep ^ab pelda.txt
+
+abajgat
+abakusz
+abál
+abált
+abba
+abbahagy
+```
+
+Legyen a végén:
+
+```bash
+grep ab$ pelda.txt
+
+átszab
+bab
+beleszab
+beszab
+bokorbab
+borhab
+bútordarab
+```
+
+A két horgonyt egyszerre is lehet használni:
+
+```bash
+grep ^valami$ pelda.txt
+
+valami
+```
+
+### Karakterhalmazok
+
+Egy konkrét karakter helyett olyan atomokat is definiálhatunk, amik többféle
+karakterre is illeszkedhetnek. Ezek állhatnak tartományokból, vagy felsorolt karakterekből,
+illetve ezek kombinációjából is
+
+ * `[a-z]`: a-tól z-ig bérmely karakterre illeszkedik
+ * `[A-Z]`: A-tól Z-ig bármely karakterre illeszkedik
+ * `[akdtx]`: Az a, k, d, t és x karakterekre illeszkedik
+ * `[0-9pqfgb-h]`: Lehet számjegy, b, c, d, e, f, g, h, p, vagy q betű
+
+Ha a `-` része a listának, azt a végére kell tenni:
+
+ * `[0-9-]`: Számjegy, vagy kötőjel
+
+A halmazt lehet negálni is a `^` jellel.
+
+ * `[^A-Z]`: Bármely karakterre illeszkedik, ami *nem* nagybetű.
+
+
