@@ -186,7 +186,7 @@ ls -lh
 A méretet átváltja (k, M, G, T stb).
 
 ```bash
-ls -r
+ls -R
 ```
 
 Rekurzívan listáz.
@@ -206,7 +206,7 @@ A rendezést megfordítja.
 Az ls kapcsolói kombinálhatóak is, például:
 
 ```bash
-ls -alr
+ls -alR
 ```
 
 Rejtett fájlokat is tartalmazó, hosszú formátumú rekurzív listát ad.
