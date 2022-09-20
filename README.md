@@ -606,6 +606,13 @@ Eddig a shellt interaktív módban használtuk, vagyis a parancsokat egyenként 
 hajtottuk végre. Ez egyszerűbb feladatok végrehajtárása elég is volt, azonban komplett
 programok (shell scriptek) írására is lehetőség van.
 
+Először is hozzunk létre egy könyvtárt, amiben a shell scriptjeink lesznek, és lépjünk bele:
+
+```bash
+mkdir proba
+cd proba
+```
+
 ## Az `mcedit` használata
 
 A shell scripteket egy fájlban kell elhelyezni, aminek a szerkesztéséhez az
@@ -623,6 +630,8 @@ Az `mc` legfontosabb billentyűkombinációi:
  * F10: kilépés
  * Ctrl-u: visszavonás
  * F8: kijelölt rész, vagy aktuális sor törlése
+
+## Az első script
 
 A shell scripteket a következő sorral kell kezdeni:
 
@@ -642,4 +651,86 @@ használt parancsok is használhatóak. Legyen az első programunk a következő
 echo "Hello, World!"
 ```
 
+Mentsük el (F2), majd adjunk rá futási jogot:
+
+
+```bash
+chmod a+x elso.sh
+```
+
+Egy apró megjegyzés: Az `mcedit` minden mentésnél azokat a jogosultságokat fogja visszaállítani,
+amiket akkor talált, amikor a fájlt megnyitotta. Az első létrehozáskor célszerű kilépni a
+szövegszerkesztőből, `chmod`-olni, majd újra megnyitni a file-t.
+
+Futtatni az elérési út megadásával tudjuk, például ha az aktuális konyvtárban van a fájlunk:
+
+```bash
+./elso.sh
+```
+
+De az összetettebb (akár relatív, akár abszolút elérési utak is működnek:
+
+```bash
+/home/abc123/proba/elso.sh
+~/proba/elso.sh
+```
+
+A program a *Hello, World!* szöveget fogja kiírni.
+
+## Adatbekérés
+
+```bash
+#!/bin/bash
+
+echo "Melyik file-t toroljem?"
+read fn
+rm $fn
+
+```
+TBD
+
+## `For` ciklus
+
+## Elágazás (`if`)
+
+TBD: test, [
+
+```bash
+#!/bin/bash
+
+for x in *
+  do
+    echo "A file neve:"
+    echo $x
+    if [ -f $x ]
+      then
+        echo "A file elso sora:"
+        cat $x | head -n 1
+      fi
+    echo
+  done
+```
+
+```bash
+#!/bin/bash
+
+for x in *
+  do
+    echo "A file neve:"
+    echo "$x"
+    if [ -f "$x" ]
+      then
+        echo "$x" egy sima file
+    elif [ -d "$x" ]
+      then
+        echo "$x" egy konyvtar
+    else
+        echo "$x" valami mas
+    fi
+  done
+```
+
+## Az `if` használata más feltételekkel
+
+TBD
 
