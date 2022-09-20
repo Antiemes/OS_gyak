@@ -600,3 +600,46 @@ ip addr show | grep -E '^ {4}inet ' | awk '{print $2}' | cut -d '/' -f 1
 172.17.0.1
 ```
 
+# Shell script alapok
+
+Eddig a shellt interaktív módban használtuk, vagyis a parancsokat egyenként beírva
+hajtottuk végre. Ez egyszerűbb feladatok végrehajtárása elég is volt, azonban komplett
+programok (shell scriptek) írására is lehetőség van.
+
+## Az `mcedit` használata
+
+A shell scripteket egy fájlban kell elhelyezni, aminek a szerkesztéséhez az
+`mcedit` programot fogjuk használni. Legyen az első scriptünk neve `elso.sh`
+és indítsuk el az `mcedit`-et a következő módon:
+
+
+```bash
+mcedit elso.sh
+```
+
+Az `mc` legfontosabb billentyűkombinációi:
+
+ * F2: mentés
+ * F10: kilépés
+ * Ctrl-u: visszavonás
+ * F8: kijelölt rész, vagy aktuális sor törlése
+
+A shell scripteket a következő sorral kell kezdeni:
+
+```bash
+#!/bin/bash
+```
+
+Ez jelzi, hogy a scriptet a `bash` fogja végrehajtani. (Hasonlót láthatunk Python és
+más interpretált nyelvek esetén is.)
+
+Az ezt követő sorok szekvenciaként végrehajtódnak és többek közt az előzőekben
+használt parancsok is használhatóak. Legyen az első programunk a következő:
+
+```bash
+#!/bin/bash
+
+echo "Hello, World!"
+```
+
+
