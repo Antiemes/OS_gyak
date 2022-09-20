@@ -691,6 +691,29 @@ TBD
 
 ## `For` ciklus
 
+Ciklust többek közt a `for` segíŧségével szervezhetünk a következő módon:
+
+```bash
+for valtozo in ertek1 ertek2 ertek3 [...]
+  do
+    ciklusmag
+  done
+```
+
+A `valtozo` sorban felveszi az `ertek1`, `ertek2`, ... értékeket és minden esetben lefut a ciklusmag.
+Azonban a shell, mint fentebb már megfigyeltük, a shell mintákat behelyettesíti, így például a
+`*` helyére az aktuális könyvtárban levő bejegyzések (fájlok, könyvtárak) kerülnek:
+
+```bash
+for fn in *
+  do
+    wc -l $fn
+  done
+```
+
+Ez a program az aktuális könyvtárban található összes fájlon, könyvtáron végigmegy és
+mindegyikre lefuttatja a `wc -l` parancsot.
+
 ## Elágazás (`if`)
 
 TBD: test, [
@@ -730,7 +753,10 @@ for x in *
   done
 ```
 
+## Aritmetika `expr` használatával és anélkül
+
 ## Az `if` használata más feltételekkel
 
 TBD
 
+## A változókról bővebben
