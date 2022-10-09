@@ -716,44 +716,146 @@ mindegyikre lefuttatja a `wc -l` parancsot.
 
 ## Elágazás (`if`)
 
-TBD: test, [
+Nézzük meg az `if` használatát egy példán keresztül:
 
 ```bash
-#!/bin/bash
-
-for x in *
+for fn in *
   do
     echo "A file neve:"
-    echo $x
-    if [ -f $x ]
+    echo "$fn"
+    if [ -f "$fn" ]
       then
-        echo "A file elso sora:"
-        cat $x | head -n 1
+        echo "Ez egy sima file."
       fi
     echo
   done
 ```
 
+### A `[` parancs
+
+A fenti szerkezetben a `[ -f "$fn" ]` egy parancs, aminek az eredménye alapján hajtja
+végre az `if` a `then`, vagy az opcionális `else` ágat. A parancs
+*eredménye* nem azonos a parancs *kimenetével*. (Ezt a számot
+a `$?` változó tartalmazza. Itt a `0` jelentése az *igaz* és
+minden más a *hamis*.)
+
+A `[` parancsot használhatjuk például:
+
+ * Stringek néhány tulajdonságának vizsgálatára:
+  * `[ -z STR ]` Az STR string hossza nem nulla.
+  * `[ -n STR ]` Az STR string hossza nulla.
+  * `[ STR1 = STR2 ]` Az STR1 és STR2 stringek egyenlőek.
+ * Számok összehasonlítására:
+  * `[ A -eq B ]` Az A és B számok egyenlőek.
+  * `[ A -ne B ]` Az A és B számok egyenlőek.
+  * `[ A -lt B ]` A < B
+  * `[ A -gt B ]` A > B
+  * `[ A -le B ]` A <= B
+  * `[ A -ge B ]` A >= B
+ * Fájlok bizonyos tulajdonságainak vizsgálatára:
+  * `[ -e FILE ]` A FILE létezik.
+  * `[ -f FILE ]` A FILE létezik és sima fájl.
+  * `[ -d FILE ]` A FILE létezik és könyvtár.
+
+További lehetőségek: `man [`, vagy `man test`.
+
+A fenti példában tehát az `if` után szereplő kifejezés tulajdonképpen egy parancs.
+Az `if` feltétel része bármilyen más parancs is lehet.
+
+### `if`, `elif` és `else`
+
+Az `else` ág akkor fog lefutni, ha a megadott feltétel nem teljesül. Az `elif` a más nyelvekben
+megszokott `else if`, vagy `elsif` megfelelője. Emellett
+az elágazásokat egymásba is lehet ágyazni. Nézzünk egy példát:
+
 ```bash
 #!/bin/bash
 
 for x in *
   do
-    echo "A file neve:"
-    echo "$x"
-    if [ -f "$x" ]
+    echo "A bejegyzes neve:"
+    echo $x
+    if [ -e $x ]
       then
-        echo "$x" egy sima file
-    elif [ -d "$x" ]
-      then
-        echo "$x" egy konyvtar
-    else
-        echo "$x" valami mas
-    fi
+        if [ -f $x ]
+          then
+            echo "A bejegyzes egy sima file."
+        elif [ -d $x ]
+          then
+            echo "A bejegyzes egy konyvtar."
+        else
+            echo "A bejegyzes se nem sima file, se nem konyvtar."
+      else
+        echo "A bejegyzes nem letezik."
+      fi
+    echo
   done
 ```
 
 ## Aritmetika `expr` használatával és anélkül
+
+Adjuk össze az összes `.txt`-re végződő fájl sorainak számát. Ehhez a következő feladatokat
+kell megoldanunk:
+ * Végig kell mennünk a fájlokon
+ * Ki kell nyernünk az adott fájl sorainak számát és eltárolni azt egy változóban.
+ * Össze kell adni a számokat.
+
+A fájlokon már végig tudunk menni a tanultak alapján:
+
+```bash
+for fn in *.txt
+  do
+    echo $fn
+  done
+```
+
+### Az `expr` parancs
+
+Az `expr` paranccsal aritmetikai műveleteket végezhetünk egész számokon:
+
+```bash
+expr 1 + 2
+expr 10 - 5
+expr 8 / 3
+expr 2 \* 3
+expr 10 % 4
+```
+
+A szorzáshoz használt `*`-ot a shell saját maga is értelmezi, ezért azt escape-elni kell (a `\` jel segíŧségével). A `%`
+jel osztási maradékot számol. Az `expr` csak egész számokkal tud számolni.
+
+### A `$()` szintaxis (parancs-behelyettesítés)
+
+A `$()`-be írt parancsot a parancsértelmező lefuttatja és a program kimenetét *behelyettesíti*. Próbáljuk ki a `wc` és az `expr`
+parancsokkal:
+
+```bash
+sor=$(cat $fn | wc -l)
+```
+
+Ezzel az `fn` változóban tárolt nevű fájl sorainak száma bekerül a `sor` változóba.
+
+
+```bash
+osszes=$(expr $osszes + $sor)
+```
+
+Ezzel pedig az `osszes` változó értékét megnöveljük a `sor` változó értékével. (Az `osszes` változót
+induláskor nullázni kell.)
+
+### A teljes program
+
+A teljes program tehát így néz ki:
+
+```bash
+osszes=0
+for fn in *.txt
+  do
+    sor=$(cat $fn | wc -l)
+    osszes=$(expr $osszes + $sor)
+  done
+echo $osszes
+```
 
 ## Az `if` használata más feltételekkel
 
