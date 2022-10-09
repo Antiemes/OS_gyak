@@ -857,8 +857,56 @@ for fn in *.txt
 echo $osszes
 ```
 
+## Keresés a fájlok között
+
+Keresni a `find` paranccsal tudunk. Paraméterek nélkül az aktuális konyvtárban keres, minden típusú
+bejegyzést, a találatokat egyszerűen kiírja.
+
+Megadhatunk neki például egy könyvtárt, ahol keresni fog:
+
+```bash
+find KONYVTAR
+```
+
+Megadhatjuk a keresendő bejegyzések típusát a `-type` kapcsolóval (`f`: fájl, `d`: könyvtár):
+
+```bash
+find -type f
+find -type d
+```
+
+Az első csak a fájlokat, a második csak a könyvtárakat fogja keresni.
+
+Illetve megadhatunk egy mintát, amire a fájl (vagy könyvtár) nevének kell illeszkednie, a `-name`
+kapcsolóval. Itt shell mintát (tehát NEM reguláris kifejezést!) kell használni.
+
+```bash
+find . -type f -name "*.txt"
+```
+
+A fenti parancs az aktuális könyvtárban (`.`) fog `.txt` végződésű fájlokat keresni.
+A `-name` kis-nagybetű érzékeny. Ennek a nem kis-nagybetű érzékeny változata a `-iname`.
+
+
+## Parancssori paraméterek kezelése
+
+A programunknak megadhatunk paramétereket (argumentumokat) is, a következő módon:
+
+```bash
+./scriptem.sh elso masodik harmadik
+```
+
+Ekkor az 1. argumentum a `$1`, a második a `$2`, a harmadik a `$3` stb. változóban lesz.
+
+Legyen az első paraméter egy könyvtár elérési útvonala, a második paraméter pedig egy fájlkiterjesztés
+
+```bash
+
+```
+
+# Összetettebb shell script elemek
+
 ## Az `if` használata más feltételekkel
 
-TBD
 
 ## A változókról bővebben
