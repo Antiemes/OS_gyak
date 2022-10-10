@@ -947,6 +947,26 @@ Futtassuk a programunkkat négy parancssori paraméterrel:
 ```
 
 Minden `shift` parancs után a paraméterlista eggyel elcsúszik. Az első helyre az eddigi második
-kerül, a második helyre az eddigi harmadik stb. 
+kerül, a második helyre az eddigi harmadik stb. Az eddigi első paraméter eltűnik, a paraméterek száma (`$#`)
+eggyel csökken.
+
+Ezek után már készíthetünk egy olyan programot, ami végigmegy az összes paraméteren:
+
+```bash
+while [ $# -ne 0 ]
+  do
+    aktualis=$1
+    echo $aktualis
+    shift
+  done
+```
+
+A programban a `$#` a paraméterek aktuális számát jelenti. A ciklus addig fog működni, amíg ez 0-ra nem csökken.
+A `$1` változón egyesével minden paraméter végighalad. A programban az `echo` csak egy példa. Értelemszerűen
+bármilyen módon felhasználhatjuk a paramétereket.
+
+Azt is megtehetjük, hogy az első (vagy az első kettő stb.) paramétert külön kezeljük, illetve nem csak egyesével tudunk
+végiglépkedni a paramétereken, hanem kettesével, hármasával stb. is.
+
 
 ## A változókról bővebben
