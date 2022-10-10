@@ -968,5 +968,17 @@ bármilyen módon felhasználhatjuk a paramétereket.
 Azt is megtehetjük, hogy az első (vagy az első kettő stb.) paramétert külön kezeljük, illetve nem csak egyesével tudunk
 végiglépkedni a paramétereken, hanem kettesével, hármasával stb. is.
 
+Készítsünk egy programot, ami tetszőlegesen sok paramétert fogad és a következő módon működik. Minden
+paraméter egy-egy fájl nevét adja meg. Minden fájlról készítsünk biztonsági másolatot a `backup` nevű
+könyvtárban.
+
+```bash
+while [ $# -ne 0]
+  do
+    fn=$1
+    cp $fn backup
+    shift
+  done
+```
 
 ## A változókról bővebben
