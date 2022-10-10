@@ -887,6 +887,8 @@ find . -type f -name "*.txt"
 A fenti parancs az aktuális könyvtárban (`.`) fog `.txt` végződésű fájlokat keresni.
 A `-name` kis-nagybetű érzékeny. Ennek a nem kis-nagybetű érzékeny változata a `-iname`.
 
+TBD: find + pipe
+TBD: find + exec
 
 ## Parancssori paraméterek kezelése
 
@@ -908,5 +910,43 @@ Legyen az első paraméter egy könyvtár elérési útvonala, a második param�
 
 ## Az `if` használata más feltételekkel
 
+## Tetszőlegesen sok parancsori paraméter (argumentum) kezelése
+
+Eddigi ismereteink szerint fix számú argumentumot tudtunk kezelni shell scriptjeinkben. Lehetőség van viszont arra is, hogy
+tetszőleges számú paramétert feldolgozzunk. Nézzük először a következő programot:
+
+```bash
+echo "Parameterek szama: $#"
+echo "Elso parameter: $1"
+echo "Masodik parameter: $2"
+echo "Harmadik parameter: $3"
+echo
+shift
+echo "Parameterek szama: $#"
+echo "Elso parameter: $1"
+echo "Masodik parameter: $2"
+echo "Harmadik parameter: $3"
+echo
+shift
+echo "Parameterek szama: $#"
+echo "Elso parameter: $1"
+echo "Masodik parameter: $2"
+echo "Harmadik parameter: $3"
+echo
+shift
+echo "Parameterek szama: $#"
+echo "Elso parameter: $1"
+echo "Masodik parameter: $2"
+echo "Harmadik parameter: $3"
+```
+
+Futtassuk a programunkkat négy parancssori paraméterrel:
+
+```bash
+./scriptem.sh elso masodik harmadik negyedik
+```
+
+Minden `shift` parancs után a paraméterlista eggyel elcsúszik. Az első helyre az eddigi második
+kerül, a második helyre az eddigi harmadik stb. 
 
 ## A változókról bővebben
