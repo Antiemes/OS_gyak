@@ -973,12 +973,44 @@ paraméter egy-egy fájl nevét adja meg. Minden fájlról készítsünk biztons
 könyvtárban.
 
 ```bash
-while [ $# -ne 0]
+while [ $# -ne 0 ]
   do
     fn=$1
     cp $fn backup
     shift
   done
 ```
+
+Bővítsük ki ezt a programot úgy, hogy ne a `backup`, hanem az első paraméterben megadott könyvtárba
+készüljenek a biztonsági mentések. A program vizsgálja meg azt is, hogy ez a könyvtár létezik-e.
+Ha nem létezik, hozza létre. Ha létezik ilyen néven bejegyzés, de az nem könyvtár, akkor
+adjon hibaüzenetet és lépjen ki. Programunk a következő módon fog kinézni:
+
+```bash
+cel=$1
+shift
+
+if [ -d $cel ]
+  then
+  echo "A $cel letezik."
+elif [ -e $cel ]
+  then
+  echo "A $cel nem konyvtar, nem hozhato letre a biztonsagi mentes."
+  exit
+else
+  echo "Nem letezik $cel neven bejegyzes, igy ilyen neven letrehozunk egy konyvtarat."
+  mkdir $cel
+fi
+
+while [ $# -ne 0 ]
+  do
+    fn=$1
+    cp $fn backup
+    shift
+  done
+```
+
+A programban az első paramétert egy külön változóban eltároljuk, majd a `shift` utasítás után úgy
+tudjuk kezelni a változókat, mint az eddigiekben.
 
 ## A változókról bővebben
