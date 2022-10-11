@@ -1049,7 +1049,7 @@ fi
 while [ $# -ne 0 ]
   do
     fn=$1
-    cp $fn backup
+    cp $fn $cel
     shift
   done
 ```
