@@ -910,6 +910,50 @@ Legyen az első paraméter egy könyvtár elérési útvonala, a második param�
 
 ## Az `if` használata más feltételekkel
 
+Az `if` parancsot nem csak a `[`-es szerkezettel tudjuk használni, hanem
+tulajdonképpen bármilyen más programmal is, aminek az eredménye alapján
+az `if` a `then`, vagy az `else` ágban levő utasításokat tudja végrehajtani.
+
+### Az `if` használata a `grep`-pel
+
+Készítsünk egy fej, vagy írás programot, ami véletlenszerűen
+ki tudja írni, hogy *FEJ*, vagy *IRAS*. Ehhez véletlenszámokat
+kell generálni. Ez a `RANDOM` változó kiolvasásával tehető meg.
+A `RANDOM` változó minden kiolvasáskor egy véletlenszerű, 0 és 32767 közötti egész számot ad.
+Ebből például úgy tudunk fejet, vagy írást csinálni, hogy a páros
+számokhoz a fejet, a páratlanokhoz az írást rendeljük hozzá.
+Tehát ha a szám utolsó számjegye 0, 2, 4, 6, vagy 8, akkor
+az eredmény fej, egyébként írás. Ezt a `grep` paranccsal
+és egy reguláris kifejezéssel tudjuk eldönteni.
+
+A reguláris kifejezésünk illeszkedjen mondjuk a fejre, tehát arra
+az esetre, amikor a szám a 0, 2, 4, 6 és 8 számok valamelyikére
+végződik. A megoldás: `'[02358]$'`. A `grep`-hez szükséges még a `-q`
+kapcsoló is, hogy magát a számot ne írja ki, csak döntse el, hogy
+illeszkedik-e a mintára, vagy nem. A teljes program:
+
+```bash
+if echo $RANDOM | grep -q '[02468]$'
+then
+  echo "FEJ"
+else
+  echo "IRAS"
+fi
+```
+
+Készítsünk olyan programot, ami végighalad az összes fájlon és megnézi,
+hogy mely fájlok első sora `#/bin/bash`. (Rekurzív keresés nem szükséges.)
+
+```bash
+for fn in *
+do
+  if head -n 1 $fn | grep -q '^#!/bin/bash$'
+  then
+    echo $fn
+  fi
+done
+```
+
 ## Tetszőlegesen sok parancsori paraméter (argumentum) kezelése
 
 Eddigi ismereteink szerint fix számú argumentumot tudtunk kezelni shell scriptjeinkben. Lehetőség van viszont arra is, hogy
@@ -1014,3 +1058,4 @@ A programban az első paramétert egy külön változóban eltároljuk, majd a `
 tudjuk kezelni a változókat, mint az eddigiekben.
 
 ## A változókról bővebben
+
