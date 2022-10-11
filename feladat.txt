@@ -1,0 +1,16 @@
+10.22.3.126
+https://github.com/Antiemes/OS_gyak
+
+A prog. kezeljen tetszőlegesen sok paramétert:
+  - 1. paraméter cél könyvtár
+  - 2. szám (n)
+  - többi par: fájlok (nevei)
+2. szint: Másoljuk le az összes fájlt
+a cél könyvtárba
+3. szint: Másoljuk le az összes fájl
+első n sorát a cél könyvtárba (azonos
+néven)
+4. szint: Számoljuk meg, hogy összesen
+hány sort másoltunk le
+5. szint: Lemásolt fájlok neve
+valami.txt --> valami_eleje.txt
