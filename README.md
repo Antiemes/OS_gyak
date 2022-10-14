@@ -211,7 +211,27 @@ ls -alR
 
 Rejtett fájlokat is tartalmazó, hosszú formátumú rekurzív listát ad.
 
-### Fájl műveletek
+### Fájl- és könyvtárműveletek
+
+#### Új könyvtár létrehozása
+
+Új könyvtárt az `mkdir` paranccsal tudnk létrehozni. Megadható neki akár egy,
+akár több könyvtár is.
+
+```bash
+mkdir ujkonyvtar
+mkdir konyvtar1 konyvtar2 konyvtar3
+```
+
+Az `mkdir` parancsnak megadhatunk egy útvonalat is, ha használjuk a `-p` kapcsolót.
+Ilyenkor a teljes útvonal mentén található összes könyvtárat létrehozza.
+
+```bash
+mkdir egyik/masik/harmadik
+```
+
+Létrejön az `egyik` könyvtár, azon belül a `masik`, azon belül pedig a `masik`,
+azon belül a `harmadik`.
 
 #### Másolás
 
@@ -285,13 +305,48 @@ A `-i` kapcsolóval kiegészítve minden törlendő fájlra, könyvtárral egyen
 
 Az `rmdir` paranccsal történik.
 
-TBD!
+```bash
+rmdir konyvtar
+rmdir konyvtar1 konyvtar2 konyvtar3
+rmdir ko*
+```
+
+A parancsnak meg tudunk adni egy, vagy több könyvtárt, illetve shell mintát is
 
 #### Áthelyezés, átnevezés
 
-Az `mv` paranccsal történik.
+Az `mv` paranccsal történik. Többféle működési módja is van a szituációtól függően,
+illetve *áthelyezni* és *átnevezni* is tud. 
 
-TBD!
+Ha két fájlt adunk meg, amik azonos könyvtárban vannak és közülük az első létezik,
+a második pedig nem akkor a fájlt *átnevezi* a könyvtáron belül.
+
+```bash
+mv regi.txt uj.txt
+```
+
+A `regi.txt` fájl új neve ezentúl `uj.txt` lesz. Ha a másodiknak megadott fájl létezik, akkor azt *felülírja*.
+
+Hasonló a helyzet akkor is, ha könyvtárról van szó:
+
+```bash
+mv regi uj
+```
+
+A `regi` ezentúl `uj` néven fog szerepelni. Ha az `uj` létezne, akkor a `regi`-t *áthelyezi*
+az `uj`-ba.
+
+Ha több paramétert adunk meg, akkor az utolsó paraméternek mindenképpen könyvtárnak kell lennie.
+A parancs ebbe a könyvtárba a többi paraméterben megadott összes fájlt és könyvtárt
+*áthelyezi*.
+
+```bash
+mv egyik.txt masik.txt akarmi.sh konyvtar1 konyvtar2 celkonyvtar
+```
+
+Az összes felsorolt fájl és könyvtár a `celkonyvtar` könyvtárba kerül.
+
+Shell minták természetesen ennél a parancsnál is használhatóak.
 
 ## Jogosultságok kezelése
 
