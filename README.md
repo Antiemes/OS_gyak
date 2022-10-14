@@ -1183,7 +1183,15 @@ tudjuk kezelni a változókat, mint az eddigiekben.
 
 ## Egy parancs kimenetének soronként történő feldolgozása
 
+Tegyük fel, hogy egy program, például egy megfelelően felparaméterezett `find`
+által kiírt adatokon szeretnénk egyesével végigmenni. Ehhez a `read`-et tudjuk
+felhasználni úgy, hogy egy pipe segítségével az adott parancsot egy `while read`
+szerkezetbe kötjük be.
 
+```bash
+TBD
+
+```
 
 ## A változókról bővebben
 
