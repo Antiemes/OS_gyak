@@ -957,8 +957,39 @@ find . -type f -name "*.txt"
 A fenti parancs az aktuális könyvtárban (`.`) fog `.txt` végződésű fájlokat keresni.
 A `-name` kis-nagybetű érzékeny. Ennek a nem kis-nagybetű érzékeny változata a `-iname`.
 
-TBD: find + pipe
-TBD: find + exec
+A `find` használata a `-exec` paraméter használatával, illetve a kimenetek további feldolgozásával
+válik igazán sokoldalúvá. A `-exec` segítségével a `find` a megtalált fájlokat, könyvtárakat
+nem egyszerűen kiírja, hanem minden egyes találatra lefuttat egy parancsot. Használata a következő:
+
+```bash
+find KONYVTAR -type TIPUS -name MINTA -exec PARANCS "{}" \;
+```
+
+A megtalált fájl, vagy könvytár nevét a `"{}"` helyére helyettesíti a parancs.
+
+```bash
+find . -type f -name "*.txt" -exec ls -l "{}" \;
+```
+
+A fenti parancs az aktuális könyvtárban megkeres minden `.txt`-re végződő fájlt
+és mindegyiken lefuttatja az `ls -l` parancsot (tehát minden fájlról egy részletes
+listát kapunk a jogosultságokkal, a mérettel stb.).
+
+```bash
+find /etc -type f -name "*.conf" -exec wc -l "{}" \;
+```
+
+A fenti parancs a `/etc` könyvtárban megkeres minden `.conf`-ra végződő fájlt
+és lefuttatja rajtuk a `wc -l` parancsot (ami kiírja, hogy melyik fájl hány sorból áll).
+
+Ezeket a kimeneteket aztán fel is dolgozhatjuk.
+
+```bash
+find /usr -type f -name "*" -exec ls -l "{}" \; | grep '^...[^x]' | wc -l
+```
+
+A fenti parancs megszámolja, hogy a `/usr` könyvtárban hány olyan fájl van, amire
+a tulajdonosának nincs futtatási joga.
 
 ## Parancssori paraméterek kezelése
 
