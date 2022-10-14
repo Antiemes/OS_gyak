@@ -369,9 +369,15 @@ valósítható meg, elsősorban szöveges tartalmak esetében.
 
 ## cat
 
+TBD
+
 ## wc
 
+TBD
+
 ## head, tail
+
+TBD
 
 # Reguláris kifejezések és a `grep` parancs
 
