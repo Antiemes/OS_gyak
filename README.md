@@ -933,6 +933,21 @@ for fn in *.txt
 echo $osszes
 ```
 
+## A `while` ciklus
+
+TBD
+
+### Több sornyi adat beolvasása `while` és `read` segítségével
+
+TBD
+
+```bash
+while read fn
+	do
+		true
+	done
+```
+
 ## Keresés a fájlok között
 
 Keresni a `find` paranccsal tudunk. Paraméterek nélkül az aktuális konyvtárban keres, minden típusú
@@ -1163,6 +1178,12 @@ while [ $# -ne 0 ]
 
 A programban az első paramétert egy külön változóban eltároljuk, majd a `shift` utasítás után úgy
 tudjuk kezelni a változókat, mint az eddigiekben.
+
+## 
+
+## Egy parancs kimenetének soronként történő feldolgozása
+
+
 
 ## A változókról bővebben
 
