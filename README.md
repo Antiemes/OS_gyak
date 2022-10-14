@@ -734,15 +734,30 @@ A program a *Hello, World!* szöveget fogja kiírni.
 
 ## Adatbekérés
 
+A billentyűzetről a `read` paranccsal kérhetünk be adatokat. A `read` után egy,
+vagy több változót kell megadni, amikbe a beolvasott adatok kerülnek.
+
+A `read` mindig egy sort olvas be.
+
+ * Ha egy változót adunk meg, akkor a teljes beolvasott sor abba a változóba kerül.
+ * Két változó esetén az első szó az első változóba, a maradék pedig a második változóba kerül.
+ * Három változó esetén az első szó az első változóba, a második szó a másodikba, minden más a harmadikba kerül.
+ * Stb.
+
+A `read`-et használhatjuk paraméterek nélkül is. Ilyenkor a beolvasott adatokat eldobja.
+
 ```bash
 #!/bin/bash
 
 echo "Melyik file-t toroljem?"
 read fn
 rm $fn
-
 ```
-TBD
+
+A fenti program a beolvasott nevű fájlt törli.
+
+A `read`-et egy másik program kimenetének soronként történő beolvasására is használhatjuk. Erről
+majd később.
 
 ## `For` ciklus
 
