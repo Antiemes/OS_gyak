@@ -1188,9 +1188,18 @@ Tegyük fel, hogy egy program, például egy megfelelően felparaméterezett `fi
 felhasználni úgy, hogy egy pipe segítségével az adott parancsot egy `while read`
 szerkezetbe kötjük be.
 
-```bash
-TBD
+Keressük meg azokat a shell scripteket a `proba` könyvtárban, amik *NEM* a `#!/bin/bash`
+sorral kezdődnek.
 
+```bash
+find . -type f -name "*.sh" | \
+	while read fn
+		do
+  if grep -vq '^#!/bin/bash$'
+	then
+	  echo 
+	fi
+    done
 ```
 
 ## A változókról bővebben
