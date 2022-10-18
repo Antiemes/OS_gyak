@@ -316,6 +316,37 @@ valósítható meg, elsősorban szöveges tartalmak esetében.
 
 ## wc
 
+A `wc` parancs megszámolja, hogy a paraméterül kapott fájlok hány *sorból*, *szóból*, illetve *karakterből*
+állnak. Több fájl megadása esetén egy összesítést is kapunk.
+
+```bash
+wc valami.txt szoveg.txt
+```
+
+Kiírja, hogy a valami.txt és a szoveg.txt hány sort, szót, illetve karaktert tartalmaz.
+
+A program működése kapcsolókkal szabályozható.
+
+Csak a sorok számlálása:
+
+```bash
+wc -l valami.txt
+```
+
+Csak a szavak számlálása:
+
+```bash
+wc -w valami.txt
+```
+
+Csak a karaktertek számlálása:
+
+```bash
+wc -c valami.txt
+```
+
+
+
 ## head, tail
 
 # Reguláris kifejezések és a `grep` parancs
