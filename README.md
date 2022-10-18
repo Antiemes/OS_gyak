@@ -211,7 +211,27 @@ ls -alR
 
 Rejtett fájlokat is tartalmazó, hosszú formátumú rekurzív listát ad.
 
-### Fájl műveletek
+### Fájl- és könyvtárműveletek
+
+#### Új könyvtár létrehozása
+
+Új könyvtárt az `mkdir` paranccsal tudnk létrehozni. Megadható neki akár egy,
+akár több könyvtár is.
+
+```bash
+mkdir ujkonyvtar
+mkdir konyvtar1 konyvtar2 konyvtar3
+```
+
+Az `mkdir` parancsnak megadhatunk egy útvonalat is, ha használjuk a `-p` kapcsolót.
+Ilyenkor a teljes útvonal mentén található összes könyvtárat létrehozza.
+
+```bash
+mkdir egyik/masik/harmadik
+```
+
+Létrejön az `egyik` könyvtár, azon belül a `masik`, azon belül pedig a `masik`,
+azon belül a `harmadik`.
 
 #### Másolás
 
@@ -285,13 +305,48 @@ A `-i` kapcsolóval kiegészítve minden törlendő fájlra, könyvtárral egyen
 
 Az `rmdir` paranccsal történik.
 
-TBD!
+```bash
+rmdir konyvtar
+rmdir konyvtar1 konyvtar2 konyvtar3
+rmdir ko*
+```
+
+A parancsnak meg tudunk adni egy, vagy több könyvtárt, illetve shell mintát is
 
 #### Áthelyezés, átnevezés
 
-Az `mv` paranccsal történik.
+Az `mv` paranccsal történik. Többféle működési módja is van a szituációtól függően,
+illetve *áthelyezni* és *átnevezni* is tud. 
 
-TBD!
+Ha két fájlt adunk meg, amik azonos könyvtárban vannak és közülük az első létezik,
+a második pedig nem akkor a fájlt *átnevezi* a könyvtáron belül.
+
+```bash
+mv regi.txt uj.txt
+```
+
+A `regi.txt` fájl új neve ezentúl `uj.txt` lesz. Ha a másodiknak megadott fájl létezik, akkor azt *felülírja*.
+
+Hasonló a helyzet akkor is, ha könyvtárról van szó:
+
+```bash
+mv regi uj
+```
+
+A `regi` ezentúl `uj` néven fog szerepelni. Ha az `uj` létezne, akkor a `regi`-t *áthelyezi*
+az `uj`-ba.
+
+Ha több paramétert adunk meg, akkor az utolsó paraméternek mindenképpen könyvtárnak kell lennie.
+A parancs ebbe a könyvtárba a többi paraméterben megadott összes fájlt és könyvtárt
+*áthelyezi*.
+
+```bash
+mv egyik.txt masik.txt akarmi.sh konyvtar1 konyvtar2 celkonyvtar
+```
+
+Az összes felsorolt fájl és könyvtár a `celkonyvtar` könyvtárba kerül.
+
+Shell minták természetesen ennél a parancsnál is használhatóak.
 
 ## Jogosultságok kezelése
 
@@ -314,8 +369,11 @@ valósítható meg, elsősorban szöveges tartalmak esetében.
 
 ## cat
 
+TBD
+
 ## wc
 
+<<<<<<< HEAD
 A `wc` parancs megszámolja, hogy a paraméterül kapott fájlok hány *sorból*, *szóból*, illetve *karakterből*
 állnak. Több fájl megadása esetén egy összesítést is kapunk.
 
@@ -345,9 +403,9 @@ Csak a karaktertek számlálása:
 wc -c valami.txt
 ```
 
-
-
 ## head, tail
+
+TBD
 
 # Reguláris kifejezések és a `grep` parancs
 
@@ -710,15 +768,30 @@ A program a *Hello, World!* szöveget fogja kiírni.
 
 ## Adatbekérés
 
+A billentyűzetről a `read` paranccsal kérhetünk be adatokat. A `read` után egy,
+vagy több változót kell megadni, amikbe a beolvasott adatok kerülnek.
+
+A `read` mindig egy sort olvas be.
+
+ * Ha egy változót adunk meg, akkor a teljes beolvasott sor abba a változóba kerül.
+ * Két változó esetén az első szó az első változóba, a maradék pedig a második változóba kerül.
+ * Három változó esetén az első szó az első változóba, a második szó a másodikba, minden más a harmadikba kerül.
+ * Stb.
+
+A `read`-et használhatjuk paraméterek nélkül is. Ilyenkor a beolvasott adatokat eldobja.
+
 ```bash
 #!/bin/bash
 
 echo "Melyik file-t toroljem?"
 read fn
 rm $fn
-
 ```
-TBD
+
+A fenti program a beolvasott nevű fájlt törli.
+
+A `read`-et egy másik program kimenetének soronként történő beolvasására is használhatjuk. Erről
+majd később.
 
 ## `For` ciklus
 
@@ -888,6 +961,21 @@ for fn in *.txt
 echo $osszes
 ```
 
+## A `while` ciklus
+
+TBD
+
+### Több sornyi adat beolvasása `while` és `read` segítségével
+
+TBD
+
+```bash
+while read fn
+	do
+		true
+	done
+```
+
 ## Keresés a fájlok között
 
 Keresni a `find` paranccsal tudunk. Paraméterek nélkül az aktuális konyvtárban keres, minden típusú
@@ -918,8 +1006,39 @@ find . -type f -name "*.txt"
 A fenti parancs az aktuális könyvtárban (`.`) fog `.txt` végződésű fájlokat keresni.
 A `-name` kis-nagybetű érzékeny. Ennek a nem kis-nagybetű érzékeny változata a `-iname`.
 
-TBD: find + pipe
-TBD: find + exec
+A `find` használata a `-exec` paraméter használatával, illetve a kimenetek további feldolgozásával
+válik igazán sokoldalúvá. A `-exec` segítségével a `find` a megtalált fájlokat, könyvtárakat
+nem egyszerűen kiírja, hanem minden egyes találatra lefuttat egy parancsot. Használata a következő:
+
+```bash
+find KONYVTAR -type TIPUS -name MINTA -exec PARANCS "{}" \;
+```
+
+A megtalált fájl, vagy könvytár nevét a `"{}"` helyére helyettesíti a parancs.
+
+```bash
+find . -type f -name "*.txt" -exec ls -l "{}" \;
+```
+
+A fenti parancs az aktuális könyvtárban megkeres minden `.txt`-re végződő fájlt
+és mindegyiken lefuttatja az `ls -l` parancsot (tehát minden fájlról egy részletes
+listát kapunk a jogosultságokkal, a mérettel stb.).
+
+```bash
+find /etc -type f -name "*.conf" -exec wc -l "{}" \;
+```
+
+A fenti parancs a `/etc` könyvtárban megkeres minden `.conf`-ra végződő fájlt
+és lefuttatja rajtuk a `wc -l` parancsot (ami kiírja, hogy melyik fájl hány sorból áll).
+
+Ezeket a kimeneteket aztán fel is dolgozhatjuk.
+
+```bash
+find /usr -type f -name "*" -exec ls -l "{}" \; | grep '^...[^x]' | wc -l
+```
+
+A fenti parancs megszámolja, hogy a `/usr` könyvtárban hány olyan fájl van, amire
+a tulajdonosának nincs futtatási joga.
 
 ## Parancssori paraméterek kezelése
 
@@ -1087,6 +1206,29 @@ while [ $# -ne 0 ]
 
 A programban az első paramétert egy külön változóban eltároljuk, majd a `shift` utasítás után úgy
 tudjuk kezelni a változókat, mint az eddigiekben.
+
+## 
+
+## Egy parancs kimenetének soronként történő feldolgozása
+
+Tegyük fel, hogy egy program, például egy megfelelően felparaméterezett `find`
+által kiírt adatokon szeretnénk egyesével végigmenni. Ehhez a `read`-et tudjuk
+felhasználni úgy, hogy egy pipe segítségével az adott parancsot egy `while read`
+szerkezetbe kötjük be.
+
+Keressük meg azokat a shell scripteket a `proba` könyvtárban, amik *NEM* a `#!/bin/bash`
+sorral kezdődnek.
+
+```bash
+find . -type f -name "*.sh" | \
+	while read fn
+		do
+  if grep -vq '^#!/bin/bash$'
+	then
+	  echo 
+	fi
+    done
+```
 
 ## A változókról bővebben
 
