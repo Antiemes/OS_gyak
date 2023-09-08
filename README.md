@@ -369,7 +369,20 @@ valósítható meg, elsősorban szöveges tartalmak esetében.
 
 ## cat
 
-TBD
+A `cat` parancs kiírja a képernyőre egy fájl tartalmát.
+
+```bash
+cat pelda.txt
+```
+
+Kiírja a pelda.txt tartalmát. De meg tudunk adni több fájlt is:
+
+```bash
+cat egyik.txt masik.txt harmadik.txt
+```
+
+Ekkor mindhárom fájl tartalmát kiírja egymás után. Ezt úgy is értelmezhetjük, hogy a fájlok tartalmát
+összefűzi (con*cat*enate, innen jön a program neve).
 
 ## wc
 
