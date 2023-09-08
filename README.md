@@ -373,7 +373,6 @@ TBD
 
 ## wc
 
-<<<<<<< HEAD
 A `wc` parancs megszámolja, hogy a paraméterül kapott fájlok hány *sorból*, *szóból*, illetve *karakterből*
 állnak. Több fájl megadása esetén egy összesítést is kapunk.
 
