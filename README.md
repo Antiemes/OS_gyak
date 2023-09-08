@@ -417,7 +417,20 @@ wc -c valami.txt
 
 ## head, tail
 
-TBD
+A `head` (jelentése fej) a fájlok elejét, a `tail` (jelentése farok) a fájlok végét írja ki. Ez alapesetben
+mindkét parancsnál 10 sort jelent, ami szabályozható.
+
+```bash
+head pelda.txt
+```
+
+Kiírja a pelda.txt első 10 sorát.
+
+```bash
+head -n 5 pelda.txt
+```
+
+Kiírja a pelda.txt első 5 sorát.
 
 # Reguláris kifejezések és a `grep` parancs
 
