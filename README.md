@@ -432,6 +432,41 @@ head -n 5 pelda.txt
 
 Kiírja a pelda.txt első 5 sorát.
 
+```bash
+tail pelda.txt
+```
+
+Kiírja a pelda.txt első 10 sorát.
+
+```bash
+tail -n 5 pelda.txt
+```
+
+Kiírja a pelda.txt első 5 sorát.
+
+Előfordulhat, hogy a fájlban nincs annyi sor, amennyit ki akarunk iratni. Ilyenkor 
+a parancs annyi sort ír ki, amennyi a fájlban van.
+
+A `head`-nek és a `tail`-nek több fájl is megadható. Ebben az esetben
+a program kiírja a fájlok nevét a következő módon. Ez a működés
+egyébként a `-q` kapcsolóval kikapcsolható.
+
+```bash
+> head -n 3 egyik.txt masik.txt
+
+==> egyik.txt <==
+A file elso sora
+A masodik sora
+Es a harmadik
+
+==> masik.txt <==
+elso
+masodik
+harmadik sor
+```
+
+
+
 # Reguláris kifejezések és a `grep` parancs
 
 A reguláris kifejezés (regular expression, regexp, regex) egy számításelméleti fogalom. Segitségével
