@@ -1,0 +1,149 @@
+ls
+mkdir uj
+cp scriptem.sh uj
+ls -l uj
+ls -ld uj
+cd uj
+cp scriptem.sh masik.sh
+ls -l
+mcedit masik.sh 
+ls -l
+cp scriptem.sh masik.sh
+ls -l
+mcedit valami.txt
+ls -l
+mkdir x
+cp masik.sh scriptem.sh valami.txt x
+ls -l x
+cp x y
+cp -r x y
+ls -l
+ls -lR
+cp -a x z
+ls -lR
+rm -r z
+cp -R x z
+ls -lR
+rm -r z
+cp -a x z
+ls -lR
+ls -l
+touch valami.txt 
+ls -l
+touch izemize.txt
+ls -l
+mkdir ukonyvtar
+ls -l
+rmdir ut
+rmdir ukonyvtar/
+ls -l
+rmdir x
+rm izemize.txt 
+ls -l
+rm z
+rm -r z
+ls -l
+mkdir ukonyvtar
+ls -l
+mv ukonyvtar/ ujkonyvtar
+ls -l
+mv valami.txt v.txt
+ls -l
+ls -l ../uj
+ls -ld ../uj
+mv v.txt valami.txt
+ls -ld ../uj
+ls -l
+mc
+mv masik.sh scriptem.sh valami.txt ujkonyvtar/
+ls -l
+ls -l ujkonyvtar/
+cd ujkonyvtar/
+ls -l
+touch xx
+ls -l
+mv valami.txt xx
+ls -l
+mkdir a
+cp *.sh a
+ls -l a
+ls -l
+rm -r a
+mkdir ../z
+mc
+cp * ../z
+ls -l ../z
+rm -r ../z
+mkdir z
+ls -l
+cp *
+ls -l
+ls -lR
+rm z/*
+ls -l
+rmdir z
+rm masik.sh 
+ls -l
+cp *
+ls -l
+echo cp *
+mkdir z
+touch xx
+ls -l
+cp scriptem.sh masik.sh
+ls -l
+echo cp *
+expr 1 + 2
+echo expr 1 * 2
+cd ..
+ls -l
+mc
+ls -l /etc
+cp /etc/*.conf .
+ls -l
+rm -i ????.conf
+rm -i *s*.conf
+ls -l
+rm -i *[aoiue]*.conf
+ls
+mc
+ls -Rl /usr/
+cd ..
+cp -r * uj
+cd uj
+ls -l
+ls -l /etc/
+ls -l
+ls -l valami.sh 
+chmod a+x valami.sh 
+ls -l valami.sh 
+chmod o-x valami.sh 
+ls -l valami.sh 
+chmod g-x valami.sh 
+ls -l valami.sh 
+chmod go-rwx valami.sh 
+ls -l valami.sh 
+chmod a+r valami.sh 
+ls -l valami.sh 
+chmod 640 valami.sh 
+ls -l valami.sh 
+chmod 777 valami.sh 
+ls -l valami.sh 
+chmod 000 valami.sh 
+ls -l valami.sh 
+chmod 754 valami.sh 
+ls -l valami.sh 
+chmod a+x *.sh
+ls -l
+chmod -R a-X *
+ls -l
+chmod -R a+X *
+ls -l
+chmod -R a-X *
+ls l
+ls -l
+chmod -R a-x *
+ls -l
+cd uj
+chmod -R a+X *
+ls -l
