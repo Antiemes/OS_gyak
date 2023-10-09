@@ -18,3 +18,7 @@ A program ne csak egyetlen fájllal dolgozzon, hanem tetszőleges mennyiségűve
 
 Hozzon létre teszt bemenetet a program számára, amivel annak helyes működését lehet bemutatni. Tesztelje a teszt bemenet segítségével a programot.
 
+## +1 jegy
+
+A program vizsgálja meg, hogy a megadott két célkönyvtár létezik-e. Ha nem létezik valamelyik, akkor hozza létre.
+
