@@ -1,6 +1,6 @@
 # Példa ZH feladat
 
-Készítsen shell scriptet, ami bizonyos szempontok aalapján leellenőrzi a megadott shell scripteket.
+Készítsen shell scriptet, ami bizonyos szempontok alapján leellenőrzi a megadott shell scripteket.
 
 ## 2-es szint
 
