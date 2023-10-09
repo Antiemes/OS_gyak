@@ -1,0 +1,142 @@
+cat /etc/passwd | grep systemd-cored
+cat /etc/passwd | grep -A 60 systemd-cored 
+cat /etc/passwd | grep -A 60 systemd-cored | grep -v systemd
+cat /etc/passwd | grep -A 60 systemd-cored | grep -v systemd | awk 'print $1'
+cat /etc/passwd | grep -A 60 systemd-cored | grep -v systemd | awk '{print $1}'
+cat /etc/passwd | grep -A 60 systemd-cored | grep -v systemd | sed 's,:.*,,'
+cat /etc/passwd | grep -A 60 systemd-cored | grep -v systemd | sed 's,:.*,,' | while read nk ; do sudo userdel -m $nk ; done
+man userdel
+cat /etc/passwd | grep -A 60 systemd-cored | grep -v systemd | sed 's,:.*,,' | while read nk ; do sudo userdel -r $nk ; done
+ls
+cat /etc/passwd
+ls
+sudo ./add.sh os2023.csv 
+ip a
+./scriptem.sh
+ls -l scriptem.sh 
+chmod a+x scriptem.sh 
+ls -l scriptem.sh 
+./scriptem.sh
+clear
+./scriptem.sh 
+ls -l scriptem.sh 
+chmod a+x scriptem.sh 
+ls -l scriptem.sh 
+./scriptem.sh 
+cat /etc/debian_version 
+w
+nano scriptem.sh 
+ls -a
+ls -1
+ls -l
+ls -lh
+ls -R
+ls -r
+ls -R
+mc
+sudo bash
+ls -R
+man ls
+ls --help
+man man
+man time
+man 3 time
+man 4 time
+man 5 time
+man date
+man 2 date
+man 3 date
+man regex
+man man
+man 7 regex
+cat
+cat scriptem.sh 
+cat valami.sh 
+cat valami.sh scriptem.sh 
+cat -n valami.sh scriptem.sh 
+head valami.sh 
+head -n 5 valami.sh 
+head scriptem.sh 
+tail -n 5 valami.sh 
+tail -n 5 scriptem.sh 
+tail -n 2 scriptem.sh 
+wc scriptem.sh 
+wc valami.sh 
+wc -l valami.sh 
+wc -w valami.sh 
+wc -c valami.sh 
+man wc
+wc -c valami.sh 
+wc -m valami.sh 
+wc -c valami.sh 
+wc -c valami.sh scriptem.sh 
+wc -c -l valami.sh scriptem.sh 
+wc -cl valami.sh scriptem.sh 
+wc -lc valami.sh scriptem.sh 
+head -n 2 valami.sh 
+head -n 2 scriptem.sh 
+head -n 4 scriptem.sh 
+head -n 4 valami.sh 
+head -n 4 valami.sh scriptem.sh 
+head -q -n 4 valami.sh scriptem.sh 
+pwd
+sudo bash
+cd ..
+ls -a
+cd ..
+cd -
+cd
+cd /usr/local/bin/
+ls
+cd ..
+ls
+cd ..
+ls
+cd
+mkdir a
+cd a
+mkdir b
+cd b
+mkdir c
+cd c
+cd
+ls -R a
+mkdir a/b/c/d
+mkdir x/y/z/w
+mkdir -p x/y/z/w
+ls -R a
+ls -R x
+rmdir x
+rmdir x/y/z/w
+rmdir x/y/z
+rmdir x/y
+rmdir x
+rm valami.sh 
+rmdir a
+rmdir a/b/c/d
+mkdir a/b/c/d
+rm a
+rm -r a
+man rm
+mc
+w
+w | grep 10.22 |wc -l
+watch 'w | grep 10.22 |wc -l'
+w
+ls
+pwd
+password
+passwd
+mc
+ls
+ls -a
+ls -l
+ls -al
+ls -al /dev
+ls -l
+mcedit scriptem.sh
+mcedit scriptem.sh 
+cat scriptem.sh 
+mcedit valami.sh
+cat > valami.sh
+mcedit valami.sh 

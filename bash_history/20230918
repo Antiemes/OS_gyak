@@ -1,0 +1,253 @@
+cat valami.sh scriptem.sh 
+cat valami.sh scriptem.sh > osszefuzott.sh
+cat osszefuzott.sh 
+wc osszefuzott.sh 
+cat
+cat > uj.sh
+cat uj.sh 
+w
+w |grep pts | grep -v antiemes |grep v
+w |grep pts | grep -v antiemes | wc -l
+w
+ls
+ls -a
+ls -l
+ls -al
+ls -alr
+ls -a -l -r
+ls -a
+ls -a1
+ls -R
+ls -al
+ls -alh
+ls -at
+ls -atr
+man ls
+man man
+man regex
+man 7 regex
+mcedit scriptem.sh
+mcedit valami.sh
+ls
+head scriptem.sh 
+head -n 3 scriptem.sh 
+tail -n 3 scriptem.sh 
+cat scriptem.sh valami.sh > osszefuzott.sh 
+w > login_lista.txt
+cat login_lista.txt 
+ls -alrRth1 > ls_kimenet.txt
+wc -l ls_kimenet.txt 
+wc -l
+wc -l < ls_kimenet.txt 
+ls -alrRth1 | wc -l
+ls -alrRth1 | wc -l | wc -c
+bc -l
+ls
+ls -1
+ls -1tr
+ls -1tr | tail -n 5
+ls -1tr | tail -n 5 | tail -n 2
+ls -1tr | tail -n 5 | tail -n 1
+ls -1tr | tail -n 5 | tail -n 1 | wc -c
+expr 1 + 2
+expr 1 - 2
+expr 10 / 3
+expr 10 * 3
+expr 10 \* 3
+expr 10 "*" 3
+expr 10 '*' 3
+expr 15 - 1
+expr `ls -1tr | tail -n 5 | tail -n 1 | wc -c` - 1
+expr $(ls -1tr | tail -n 5 | tail -n 1 | wc -c) - 1
+cat scriptem.sh valami.sh | wc -l
+cat -n scriptem.sh | tail -n 1
+man 7 regex
+ls
+wc -l magyar-szavak.txt 
+cp magyar-szavak.txt /tmp/
+head -n 10 /tmp/magyar-szavak.txt 
+tail -n 10 /tmp/magyar-szavak.txt 
+man shuf
+shuf /tmp/magyar-szavak.txt 
+shuf /tmp/magyar-szavak.txt | head -n 1
+ls -l /tmp/magyar-szavak.txt 
+chmod a+r /tmp/magyar-szavak.txt 
+grep kko /tmp/magyar-szavak.txt 
+man grep
+grep --color kko /tmp/magyar-szavak.txt 
+ls
+alias 
+alias ls='ls --color=auto -lh'
+ls
+ls -r
+unalias ls
+ls
+alias 
+alias ls='ls --color=auto'
+grep --color kko /tmp/magyar-szavak.txt 
+grep --color kko /tmp/magyar-szavak.txt | wc -l
+grep --color -v kko /tmp/magyar-szavak.txt | wc -l
+grep Mári /tmp/magyar-szavak.txt 
+grep mári /tmp/magyar-szavak.txt 
+grep mári --color /tmp/magyar-szavak.txt 
+grep Mári --color /tmp/magyar-szavak.txt 
+grep Mári -i --color /tmp/magyar-szavak.txt 
+grep Mári -q --color /tmp/magyar-szavak.txt 
+grep mári /tmp/magyar-szavak.txt 
+grep mári --color /tmp/magyar-szavak.txt 
+grep ^mári --color /tmp/magyar-szavak.txt 
+grep mári$ --color /tmp/magyar-szavak.txt 
+grep 'mári$' --color /tmp/magyar-szavak.txt 
+grep '^mári.$' --color /tmp/magyar-szavak.txt 
+grep '^már..$' --color /tmp/magyar-szavak.txt 
+grep '^már[ariouőúűáóüö].$' --color /tmp/magyar-szavak.txt 
+grep '^má[^xy][ariouőúűáóüö].$' --color /tmp/magyar-szavak.txt 
+grep '^má[a-z][ariouőúűáóüö].$' --color /tmp/magyar-szavak.txt 
+grep '^má[A-Z][ariouőúűáóüö].$' --color /tmp/magyar-szavak.txt 
+grep '^má[A-Zc-uz][ariouőúűáóüö].$' --color /tmp/magyar-szavak.txt 
+ls -l
+ls -l | grep '^d'
+ls -l | grep '^d' | wc -l
+cd /tmp/
+mkdir kk
+cd kk
+mkdir valami masik uj
+ls /home/
+ls /home/ | grep -v antiemes
+chmod -R a+rwX *
+for x in $(ls /home/ | grep -v antiemes) ;do sudo cp -r * /home/$x ;echo $x ;done
+cd
+ls -l | grep '^d' | wc -l
+ls -l | grep '^d'
+mcedit szamok.txt
+grep '-' szamok.txt 
+grep '-1' szamok.txt 
+mcedit szamok.txt
+grep '-2' szamok.txt 
+grep '-4' szamok.txt 
+grep -e '-2' szamok.txt 
+grep -e '-2' szamok.txt | wc -l
+grep '^-' szamok.txt 
+grep '^-' szamok.txt | wc -l
+grep '^[^-]' szamok.txt
+grep '^[^-]' szamok.txt | wc -l
+w
+w | grep '^[a-z]'
+w | grep '^[a-z]' | grep -v '^antiemes'
+w | grep '^[a-z]' | grep -v '^antiemes' | wc -l
+w
+w | grep '^[a-z]' | grep -v '^antiemes' | wc -l
+w | grep '^[a-z]' | grep -v '^antiemes'
+w | grep '^[a-z]' | grep -v '^antiemes' | awk '{print $1}'
+w | grep '^[a-z]' | grep -v '^antiemes' | awk '{print $1}' | sort 
+w | grep '^[a-z]' | grep -v '^antiemes' | awk '{print $1}' | sort -u
+w | grep '^[a-z]' | grep -v '^antiemes' | awk '{print $1}' | sort -u | wc -l
+w
+w | grep '^[a-z]'
+w | grep '^[a-z]' | grep -v '^antiemes'
+w | grep '^[a-z]' | grep -v '^antiemes' | awk '{print $1}'
+w | grep '^[a-z]' | grep -v '^antiemes' | awk '{print $1}' | sort -u
+w | grep '^[a-z]' | grep -v '^antiemes' | awk '{print $1}' | sort -u | wc -l
+w | grep '^[a-z]' | grep -v '^antiemes'|awk '{print $1}' | sort -u | wc -l
+w|grep '^[a-z]'|grep -v '^antiemes'|awk '{print $1}'|sort -u|wc -l
+w | grep '^[a-z]' | grep -v '^antiemes' | awk '{print $1}' | sort -u | wc-l
+w | grep '^[a-z]' | grep -v '^antiemes' | awk '{print $1}' | sort -u | wc                                                -l
+w | grep '^[a-z]' | grep -v '^antiemes' | awk '{print$1}' | sort -u | wc -l
+w | grep '^[a-z]' | grep -v '^antiemes' | awk ' { print$1 } ' | sort -u | wc -l
+w | grep '^[a-z]' | grep -v ' ^antiemes' | awk '{print $1}' | sort -u | wc -l
+w | grep '^[a-z]' | grep -v '^ antiemes' | awk '{print $1}' | sort -u | wc -l
+w | grep '^[a-z]' | grep -v '^antiemes' | awk '{print $1}' | sort -u | wc -l
+grep 'oo' magyar-szavak.txt 
+grep 'o{2}' magyar-szavak.txt 
+grep 'o{2}' /tmp/magyar-szavak.txt 
+grep 'o\{2\}' /tmp/magyar-szavak.txt 
+grep -E 'o\{2\}' /tmp/magyar-szavak.txt 
+grep -E 'o{2}' /tmp/magyar-szavak.txt 
+grep -E '(izmus$|ista$)' /tmp/magyar-szavak.txt 
+grep '(izmus$|ista$)' /tmp/magyar-szavak.txt 
+grep '\(izmus$\|ista$\)' /tmp/magyar-szavak.txt 
+grep '(.*)' magyar-szavak.txt 
+grep '.*' magyar-szavak.txt 
+grep -E 'o{3}' /tmp/magyar-szavak.txt 
+grep -E 'o{2}' /tmp/magyar-szavak.txt 
+grep -E 'o{2,3}' /tmp/magyar-szavak.txt 
+grep -E 'o{2,}' /tmp/magyar-szavak.txt 
+grep -E '[aoueiíéáűőúöüó]{3,}' /tmp/magyar-szavak.txt 
+grep -E '[aoueiíéáűőúöüó]{3,}' --color /tmp/magyar-szavak.txt 
+grep -E '[aoueiíéáűőúöüó]{4,}' --color /tmp/magyar-szavak.txt 
+grep -E 'sz[aoueiíéáűőúöüó]*zs' --color /tmp/magyar-szavak.txt 
+grep -E 'sz[aoueiíéáűőúöüó]+zs' --color /tmp/magyar-szavak.txt 
+grep 'sz[aoueiíéáűőúöüó]+zs' --color /tmp/magyar-szavak.txt 
+grep 'sz[aoueiíéáűőúöüó]\+zs' --color /tmp/magyar-szavak.txt 
+grep -E 'sz[aoueiíéáűőúöüó]+zs' --color /tmp/magyar-szavak.txt 
+grep -E 'sz[aoueiíéáűőúöüó]?zs' --color /tmp/magyar-szavak.txt 
+ip addr show
+ip addr show | grep ^[0-9]
+ip addr show | 'inet '
+ip addr show | grep 'inet '
+ip addr show | grep '\tinet '
+ip addr show | grep '\sinet '
+ip addr show | grep '^\sinet '
+ip addr show | grep -E '^\s+inet '
+ip addr show | grep 'inet'
+ip addr show | grep 'inet '
+ip addr show | grep '    inet '
+ip addr show | grep '^    inet '
+ip addr show | grep '^ {4}inet '
+ip addr show | grep -E '^ {4}inet '
+ip addr show | grep -E '^ *inet '
+ip addr show | grep -E '^\s*inet '
+ip addr show | grep -E '(^[0-9]|^\s*inet )'
+ip addr show | grep -E '^[0-9]'
+ip addr show | grep -E '^[0-9]' | awk '{print $2}'
+ip addr show | grep -E '^\s*inet ' | awk '{print $2}'
+ip addr show | grep -E '(^[0-9]|^\s*inet )'
+ip addr show | grep -E '(^[0-9]|^\s*inet )' | awk '{print $2}'
+ls -l
+ls -l | grep '^d'
+ls -l | grep '^d' | wc -l
+ls -l | grep '^-' | wc -l
+ls -l | grep '^-........x' | wc -l
+ls -l | grep '^-........x' 
+ls -l | grep '^-..x' 
+ls -l | grep '^-..x..[^x]..[^x]' 
+chmod og-x x*
+ls -l | grep '^-..x..[^x]..[^x]' 
+ls -l | grep '^-..x' | grep -v 'sh$'
+mcedit push
+chmod a+x pu
+chmod a+x push 
+ls -l | grep '^-..x' | grep -v 'sh$'
+ls -l | grep '^-..x' | grep -v '.sh$'
+ls -l | grep '^-..x' | grep -v '\.sh$'
+ls -l
+ls -l | awk '{print 9}'
+ls -l | awk '{print $9}'
+ls -l | awk '{print $9 $5}'
+ls -l | awk '{print $9 " " $5}'
+ls -l | 
+ls -l
+ls -l | sort -k 5
+ls -l | sort -k 5 -n 
+ls -l | sort -k 5 -n | tail -n 1
+ls -l | sort -k 5 -n | tail -n 1 | awk '{print $9 " " $5}'
+ls -l | sort -k 5 -n | head -n 1 | awk '{print $9 " " $5}'
+ls -l | sort -k 5 -n -r | head -n 1 | awk '{print $9 " " $5}'
+ls -lR | sort -k 5 -n -r | head -n 1 | awk '{print $9 " " $5}'
+ls -lR /usr | sort -k 5 -n -r | head -n 1 | awk '{print $9 " " $5}'
+grep '^.....$' /tmp/magyar-szavak.txt 
+grep '^.....$' /tmp/magyar-szavak.txt | grep -v '[A-Z]'
+grep '^.....$' /tmp/magyar-szavak.txt | grep -v '[A-Z]' | shuf
+grep '^.....$' /tmp/magyar-szavak.txt | grep -v '[A-Z]' | shuf | head -n 1
+grep -v '[ojta]' /tmp/magyar-szavak.txt | grep '^.....$'
+grep -v '[ojta]' /tmp/magyar-szavak.txt | grep '^.....$' | shuf | head -n 1
+grep -v '[ojtasógu]' /tmp/magyar-szavak.txt | grep '^....[^n]$' | grep n | shuf | head -n 1
+grep -v '[ojtasóguövád]' /tmp/magyar-szavak.txt | grep '^.[^n]..[^n]$' | grep n | shuf | head -n 1
+grep -v '[ojtasóguövádhl]' /tmp/magyar-szavak.txt | grep '^[^ni]i[^i][^i][^ni]$' | grep n | shuf | head -n 1
+grep -v '[ojtasóguövádhlkéz]' /tmp/magyar-szavak.txt | grep '^[^ni]in[^i][^ni]$' | grep n | shuf | head -n 1
+grep -v '[ojtasóguövádhlkéz]' /tmp/magyar-szavak.txt | grep -v '[A-Z]' | grep '^[^ni]in[^i][^ni]$' | grep n | shuf | head -n 1
+grep -v '[ojtasóguövádhlkézpc]' /tmp/magyar-szavak.txt | grep -v '[A-Z]' | grep '^[^ni]in[^i][^nie]$' | grep e | shuf | head -n 1
+grep -v '[ojtasóguövádhlkézpc]' /tmp/magyar-szavak.txt | grep -v '[A-Z]' | grep '^[^ni]in[^i][^nie]$' | grep e | shuf
+grep -v '[ojaóguövádhképc]' /tmp/magyar-szavak.txt | grep -v '[A-Z]' | grep '^[^ni]ine[^nie]$' | shuf | head -n 1
+grep -v '[ojaóguövádhképc]' /tmp/magyar-szavak.txt | grep -v '[A-Z]' | grep '^[^ni]ine[^nie]$' | shuf
+grep -v '[ojaóguövádhképc]' /tmp/magyar-szavak.txt | grep -v '[A-Z]' | grep -E '^.{1,2}ine.{1,2}$' | shuf
