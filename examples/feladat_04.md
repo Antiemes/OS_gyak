@@ -10,6 +10,14 @@ A vizsgált rendellenességek:
 
 ## +1 jegy
 
+A program vizsgálja meg azt is, hogy a megtalált shell script (`.sh`-ra végződő file) első sora megfelelő-e.
+
+A megfelelőnek minősülő fájl a következő sorral kezdődik:
+
+```bash
+#!/bin/bash
+```
+
 
 ## +1 jegy
 
