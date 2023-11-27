@@ -24,6 +24,7 @@ Keressük meg azokat a fájlokat, amelyek nem `.sh`-ra végződnek, de arra kell
 
 ## +1 jegy
 
+A program fogadjon el egy parancssori paramétert, ami a vizsgálandó könyvtár neve. Ha ez nincs megadva, akkor legyen az alapérték az aktuális könyvtár.
 
 ## +1 jegy
 
