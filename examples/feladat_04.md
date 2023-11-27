@@ -18,9 +18,9 @@ A megfelelőnek minősülő fájl a következő sorral kezdődik:
 #!/bin/bash
 ```
 
-
 ## +1 jegy
 
+Keressük meg azokat a fájlokat, amelyek nem `.sh`-ra végződnek, de arra kellene, hogy végződjenek. (Az első soruk `#!/bin/bash` és van futási joguk.)
 
 ## +1 jegy
 
