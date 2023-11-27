@@ -32,3 +32,5 @@ A program előző pontot kibővítve fogadjon el bármennyi parancssori paramét
 
 ## +1 jegy
 
+A program vizsgálja meg, hogy a megtalált fájlok jogaival kapcsolatban van-e anomália. Van-e valamelyik szereplőnek magasabb jogosultsági szintje, mint a tulajdonosnak?
+
