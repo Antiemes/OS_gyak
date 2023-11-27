@@ -28,6 +28,7 @@ A program fogadjon el egy parancssori paramétert, ami a vizsgálandó könyvtá
 
 ## +1 jegy
 
+A program előző pontot kibővítve fogadjon el bármennyi parancssori paramétert.
 
 ## +1 jegy
 
