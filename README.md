@@ -985,7 +985,7 @@ expr 2 \* 3
 expr 10 % 4
 ```
 
-A szorzáshoz használt `*`-ot a shell saját maga is értelmezi, ezért azt escape-elni kell (a `\` jel segíŧségével). A `%`
+A szorzáshoz használt `*`-ot a shell saját maga is értelmezi, ezért azt escape-elni kell (a `\` jel segítségével). A `%`
 jel osztási maradékot számol. Az `expr` csak egész számokkal tud számolni.
 
 ### A `$()` szintaxis (parancs-behelyettesítés)
