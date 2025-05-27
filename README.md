@@ -581,7 +581,7 @@ kiírta az adott szót. A reguláris kifejezésben megadhatunk *horgonyokat*,
 amik valahova (a sor elejére, végére) lerögzítik a reguláris kifejezés adott részét.
 
  * `^`: A sor elejére rögzít
- * `$`: A sor végére rögzíŧ
+ * `$`: A sor végére rögzít
 
 
 Legyen a reguláris kifejezés a sor elején:
