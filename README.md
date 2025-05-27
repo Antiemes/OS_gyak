@@ -855,7 +855,7 @@ majd később.
 
 ## `For` ciklus
 
-Ciklust többek közt a `for` segíŧségével szervezhetünk a következő módon:
+Ciklust többek közt a `for` segítségével szervezhetünk a következő módon:
 
 ```bash
 for valtozo in ertek1 ertek2 ertek3 [...]
