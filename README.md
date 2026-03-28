@@ -845,6 +845,8 @@ A `read`-et használhatjuk paraméterek nélkül is. Ilyenkor a beolvasott adato
 
 echo "Melyik file-t toroljem?"
 read fn
+# Vagy egy sorban:
+# read -p "Melyik file-t toroljem?" fn
 rm $fn
 ```
 
@@ -1384,7 +1386,11 @@ done
 # Feldolgozott kapcsolók eltávolítása a pozicionális paraméterek közül
 shift $((OPTIND-1))
 ```
-
+### `printf` (Számok és sztringek formázása):**
+  A legelegánsabb megoldás vezető nullák (zero padding) hozzáadásához.
+  * *Kiíratás:* `printf "%02d\n" 9` $\rightarrow$ `09`
+  * *Változóba mentés közvetlenül (`-v`):* `printf -v ho "%02d" $szam` (A `$ho` értéke `09` lesz).
+  
 ### Szövegfolyam-szerkesztő: `sed` (Stream Editor)
 A `sed` beolvassa a bemenetet, soronként végrehajtja a megadott utasításokat, majd kiírja az eredményt. Három leggyakoribb művelete a kiválasztás (print), a szerkesztés (substitute) és a törlés (delete).
 
