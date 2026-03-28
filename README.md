@@ -1459,22 +1459,3 @@ Ha a megírt szkript nem a várt módon működik, a bash beépített eszközeiv
     ```bash
     bash -n script.sh
     ```
-
-## Hibakeresés (Debugging)
-
-Ha a megírt szkript nem a várt módon működik, a bash beépített eszközeivel kideríthetjük a hiba okát.
-
-* **Futtatás nyomkövetéssel (Trace mód):** A bash kiírja az összes parancsot a változók behelyettesítése után, de még a végrehajtásuk előtt.
-    ```bash
-    bash -x script.sh
-    ```
-* **Nyomkövetés a szkripten belül:** Csak egy adott kódrészletet is vizsgálhatunk:
-    ```bash
-    set -x  # Debug mód BE
-    # ... hibagyanús parancsok ...
-    set +x  # Debug mód KI
-    ```
-* **Szintaktikai ellenőrzés (Syntax check):** Végignézi a kódot szintaktikai hibákat keresve (pl. hiányzó `fi` vagy `done`), de **nem hajtja végre** a parancsokat.
-    ```bash
-    bash -n script.sh
-    ```
