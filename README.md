@@ -956,6 +956,40 @@ for x in *
   done
 ```
 
+### A `[[ ]]` parancs (Kiterjesztett teszt)
+A hagyományos `[ ]` (test) parancs modern, "okosabb" alternatívája:
+
+* **Sztringek összehasonlítása (`<`, `>`):** A `[[ ]]` közvetlenül támogatja az ABC rend szerinti összehasonlítást: `[[ "a" < "b" ]]`. A sima `[ ]` esetében a kacsacsőrt a bash fájlátirányításnak értelmezi, így ott azt "escapelni" kellene (`[ "a" \< "b" ]`).
+* **Szóközök és üres változók:** Nem dől össze a szkript (nincs word splitting), ha egy változó üres vagy szóközt tartalmaz.
+* **Logikai operátorok (`&&`, `||`):** Közvetlenül a zárójeleken belül használhatóak. Pl.: `[[ -e $fajl && -r $fajl ]]`
+* **Mintaillesztés (Wildcard):** A `==` operátor jobb oldalán használhatsz `*` és `?` karaktereket. Pl.: `[[ $fajlnev == *.txt ]]`
+* **Reguláris kifejezések (Regex):** A `=~` operátorral regexet is illeszthetünk. Pl.: `[[ $szam =~ ^[0-9]+$ ]]`
+
+### Számok vs. Sztringek összehasonlítása (`-lt` vs `<`)
+Gyakori hiba a bash-ban a matematikai és a szöveges összehasonlítás összekeverése.
+* **`-lt`, `-gt`, `-eq`, `-ne`, `-le`, `-ge`:** Szigorúan **matematikai** összehasonlítás. Számoknál a `[ ]` és `[[ ]]` között mindig ezt használd! (Pl. `[ 2 -lt 10 ]` $\rightarrow$ IGAZ).
+* **`<` és `>` a `[[ ]]` között:** **Szöveges (ABC sorrend szerinti)** összehasonlítás. Számokra veszélyes! (Pl. `[[ 10 < 2 ]]` $\rightarrow$ IGAZ, mert az '1' karakter előrébb van az ABC-ben, mint a '2').
+* **`<` a `(( ))` között:** Itt a kacsacsőr is matematikai összehasonlítást jelent (C-stílusú matek). Pl. `(( 2 < 10 ))` $\rightarrow$ IGAZ.
+* **VIGYÁZAT:** A sima `[ ]` között a `<` jelet a bash **fájl átirányításnak (beolvasásnak)** hiszi, és hibát okozhat!
+
+### A `case` szerkezet (Többszörös elágazás)
+Ha egy változó értékét sok különböző esettel kell összehasonlítani, a `case` átláthatóbb, mint egy hosszú `if-elif-else` lánc.
+
+```bash
+read -p "Folytatod? (i/n): " valasz
+case $valasz in
+    [iI]*)
+        echo "Folytatás..."
+        ;;
+    [nN]*)
+        echo "Kilépés."
+        ;;
+    *)
+        echo "Érvénytelen válasz."
+        ;;
+esac
+```
+
 ## Aritmetika `expr` használatával és anélkül
 
 Adjuk össze az összes `.txt`-re végződő fájl sorainak számát. Ehhez a következő feladatokat
@@ -1021,9 +1055,32 @@ for fn in *.txt
 echo $osszes
 ```
 
-## A `while` ciklus
+### C-stílusú `for` ciklus
+Ha pontosan tudjuk, hányszor akarjuk lefuttatni a ciklust, vagy indexekkel számolunk:
+```bash
+for (( i=1; i<=5; i++ )); do
+    echo "Sorszám: $i"
+done
+```
 
-TBD
+### A `while` ciklus
+Addig fut, amíg a vizsgált feltétel **igaz** (0-s visszatérési érték).
+```bash
+szamlalo=0
+while [[ $szamlalo -lt 3 ]]; do
+    echo "Számláló: $szamlalo"
+    ((szamlalo++))
+done
+```
+
+### Az `until` ciklus
+Addig fut, amíg a vizsgált feltétel **hamis** (nem 0 a visszatérési érték).
+```bash
+until [[ -f "kesz.txt" ]]; do
+    echo "Várakozás a fájl létrejöttére..."
+    sleep 1
+done
+```
 
 ### Több sornyi adat beolvasása `while` és `read` segítségével
 
@@ -1291,4 +1348,127 @@ find . -type f -name "*.sh" | \
 ```
 
 ## A változókról bővebben
+idk
 
+## Parancssori kapcsolók feldolgozása: a `getopts`
+
+Ha a szkriptünknek kapcsolókat (opciókat) szeretnénk megadni (pl. `-d 20260328 -h`), a `getopts` a legkényelmesebb beépített megoldás. Általában `while` ciklussal és `case` szerkezettel kombináljuk.
+
+* **Szintaxis:** `getopts "d:h" option` (A `:` jelzi, hogy a `-d` paramétert is vár, míg a `-h` csak egy "zászló").
+* **`$OPTARG`:** Tartalmazza a paramétert váró kapcsoló megadott értékét.
+* **`$OPTIND`:** A következő feldolgozandó argumentum sorszáma.
+
+**Példa adatok validálásával:**
+```bash
+while getopts d: option; do
+    case ${option} in
+        d)
+            if [[ ${OPTARG} =~ [a-zA-Z] ]]; then
+                echo "Hiba: A megadott dátum betűt is tartalmaz!"
+                exit 1
+            elif ! [[ ${OPTARG} =~ ^[0-9]{8}$ ]]; then
+                echo "Hiba: A formátum nem 8 karakter hosszú szám!"
+                exit 1
+            else
+                dat=$(date -d "${OPTARG}" "+%Y_%m%d")
+                echo "Feldolgozott dátum: $dat"
+            fi
+            ;;
+        \?)
+            echo "Használat: $0 [-d ÉÉÉÉHHNN]"
+            exit 1
+            ;;
+    esac
+done
+
+# Feldolgozott kapcsolók eltávolítása a pozicionális paraméterek közül
+shift $((OPTIND-1))
+```
+
+### Szövegfolyam-szerkesztő: `sed` (Stream Editor)
+A `sed` beolvassa a bemenetet, soronként végrehajtja a megadott utasításokat, majd kiírja az eredményt. Három leggyakoribb művelete a kiválasztás (print), a szerkesztés (substitute) és a törlés (delete).
+
+* **Select (Kiválasztás / Kiíratás - `p`):**
+  Alapból a `sed` mindent kiír. A `-n` kapcsolóval ezt elnyomjuk, és a `p` (print) paranccsal csak azt íratjuk ki, ami illeszkedik.
+  * *Adott sorok kiíratása (2-től 4-ig):* `sed -n '2,4p' fajl.txt`
+  * *Mintára illeszkedő sorok kiíratása:* `sed -n '/hiba/p' /var/log/syslog`
+
+* **Edit (Szerkesztés / Csere - `s`):**
+  Sorminták keresése és cseréje. A `g` (global) flag nélkül csak a sor első találatát cseréli.
+  * *Példa:* `echo "alma alma" | sed 's/alma/körte/'` > **Eredmény:** `körte alma`
+  * *Globális csere:* `echo "alma alma" | sed 's/alma/körte/g'` > **Eredmény:** `körte körte`
+  * *Helyben módosítás fájlban (`-i`):* `sed -i 's/127.0.0.1/localhost/g' config.txt`
+
+* **Delete (Törlés - `d`):**
+  Sorok eltávolítása a kimenetből (a fájlból nem töröl, kivéve ha `-i`-t használunk).
+  * *Adott sor törlése (pl. 3. sor):* `sed '3d' fajl.txt`
+  * *Mintára illeszkedő sorok törlése:* `echo -e "alma\nkörte\nalma" | sed '/körte/d'` > **Eredmény:** csak az "alma" sorok maradnak.
+
+### Oszlopok és karakterek kivágása: `cut`
+Soronkénti darabolásra és adott adatok kinyerésére való.
+* **Oszlop kivágása:** `-d` a határoló (delimiter), `-f` a mező (field).
+  * *Példa:* `echo "nev:jelszo:uid" | cut -d':' -f1` > **Eredmény:** `nev`
+* **Karakterek kivágása:** `-c` (characters).
+  * *Példa:* `echo "123456789" | cut -c1-5` > **Eredmény:** `12345`
+
+### Dátum és idő: `date`
+Formázásra és dátum-matematikára is kiváló.
+* **Formázott kiíratás (`+`):**
+  * *Példa:* `date "+%Y-%m-%d %H:%M"` > Eredmény pl.: `2026-03-28 20:30`
+* **Időpont konverzió és eltolás (`-d`):**
+  * *Példa (milyen nap volt tegnap?):* `date -d "yesterday" "+%A"`
+  * *Példa (bemenet újraformázása):* `date -d "20260328" "+%Y.%m.%d."` > **Eredmény:** `2026.03.28.`
+
+### Útvonalak bontása: `basename` és `dirname`
+Fájlelérési útvonalak (path) sztringjeit szedik szét (nem ellenőrzik, hogy a fájl tényleg létezik-e a lemezen!).
+* **`basename` (A fájl neve):** Levágja az útvonalat.
+  * *Példa:* `basename /var/log/syslog` > **Eredmény:** `syslog`
+  * *Tipp (kiterjesztés levágása):* `basename /etc/nginx.conf .conf` > **Eredmény:** `nginx`
+* **`dirname` (A könyvtár útvonala):** Levágja a fájlnevet.
+  * *Példa:* `dirname /var/log/syslog` > **Eredmény:** `/var/log`
+
+### Fájlok összehasonlítása: `diff`
+Két fájl közötti eltéréseket mutatja meg sorról sorra.
+* **Alap használat:** `diff regi.txt uj.txt`
+* **"Unified" formátum (`-u`):** Emberibb, Git-szerű kimenet. A `+` jelzi a hozzáadott, `-` a törölt sorokat.
+  * *Példa:* `diff -u regi.txt uj.txt`
+  *(Kimenet pl.: `-régi sor` és `+új sor` egymás alatt, környezettel együtt).*
+* **Könyvtárak összehasonlítása:** `diff -r mappa1/ mappa2/`
+
+## Hibakeresés (Debugging)
+
+Ha a megírt szkript nem a várt módon működik, a bash beépített eszközeivel kideríthetjük a hiba okát.
+
+* **Futtatás nyomkövetéssel (Trace mód):** A bash kiírja az összes parancsot a változók behelyettesítése után, de még a végrehajtásuk előtt.
+    ```bash
+    bash -x script.sh
+    ```
+* **Nyomkövetés a szkripten belül:** Csak egy adott kódrészletet is vizsgálhatunk:
+    ```bash
+    set -x  # Debug mód BE
+    # ... hibagyanús parancsok ...
+    set +x  # Debug mód KI
+    ```
+* **Szintaktikai ellenőrzés (Syntax check):** Végignézi a kódot szintaktikai hibákat keresve (pl. hiányzó `fi` vagy `done`), de **nem hajtja végre** a parancsokat.
+    ```bash
+    bash -n script.sh
+    ```
+
+## Hibakeresés (Debugging)
+
+Ha a megírt szkript nem a várt módon működik, a bash beépített eszközeivel kideríthetjük a hiba okát.
+
+* **Futtatás nyomkövetéssel (Trace mód):** A bash kiírja az összes parancsot a változók behelyettesítése után, de még a végrehajtásuk előtt.
+    ```bash
+    bash -x script.sh
+    ```
+* **Nyomkövetés a szkripten belül:** Csak egy adott kódrészletet is vizsgálhatunk:
+    ```bash
+    set -x  # Debug mód BE
+    # ... hibagyanús parancsok ...
+    set +x  # Debug mód KI
+    ```
+* **Szintaktikai ellenőrzés (Syntax check):** Végignézi a kódot szintaktikai hibákat keresve (pl. hiányzó `fi` vagy `done`), de **nem hajtja végre** a parancsokat.
+    ```bash
+    bash -n script.sh
+    ```
